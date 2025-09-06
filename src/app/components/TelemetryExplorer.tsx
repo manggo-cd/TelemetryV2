@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   LineChart,
   Line,
@@ -386,7 +386,7 @@ export default function TelemetryExplorer() {
                   <Tooltip labelFormatter={(l) => fmtTime(Number(l))} />
                   <Legend />
 
-                  {selectedChannels.map((key, i) => (
+                  {selectedChannels.map((key) => (
                     <Line
                       key={key}
                       yAxisId={1}
@@ -430,7 +430,7 @@ export default function TelemetryExplorer() {
                     tickFormatter={(v) => new Date(v).toLocaleTimeString()}
                     onChange={(range) => {
                       if (!range) return;
-                      const { startIndex, endIndex } = range as any;
+                      const { startIndex, endIndex } = range as { startIndex: number; endIndex: number };
                       const arr = primary.samples;
                       if (arr[startIndex] && arr[endIndex]) setDomain([arr[startIndex].t, arr[endIndex].t]);
                     }}
